@@ -51,8 +51,19 @@ elif menu == "🔥 Tren Desain":
 elif menu == "⭐ Favorite":
     st.title("⭐ Desain Favorit Kamu")
     favorites = load_favorites()
+
     if favorites:
         for f in favorites:
-            st.write(f"❤️ {f}")
+            col1, col2 = st.columns([5,1])
+            with col1:
+                st.write(f"❤️ {f}")
+            with col2:
+                if st.button("🗑️ Hapus", key=f):
+                    from favorite import delete_favorite
+                    delete_favorite(f)
+                    st.success(f"{f} dihapus dari favorit.")
+                    st.rerun()
     else:
         st.info("Belum ada desain favorit disimpan.")
+
+
